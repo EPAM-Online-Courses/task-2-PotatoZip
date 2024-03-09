@@ -24,14 +24,14 @@ public class GuessNumberGame {
 
         try {
             this.M = Integer.parseInt(argument);
-            if (M > UsefulConstants.MAX_UPPER_BOUND || M < 1) {
-                System.out.println(UsefulConstants.WRONG_ARGUMENT);
-                throw new java.lang.IllegalArgumentException("Not in range");
-            }
         }
         catch (NumberFormatException e) {
             System.out.println(UsefulConstants.WRONG_ARGUMENT);
             throw new java.lang.IllegalArgumentException("Wrong format");
+        }
+        if (M > UsefulConstants.MAX_UPPER_BOUND || M < 1) {
+            System.out.println(UsefulConstants.WRONG_ARGUMENT);
+            throw new java.lang.IllegalArgumentException();
         }
 
         this.L = (int) ((Math.log(M) / Math.log(2)) + 1);
@@ -49,16 +49,19 @@ public class GuessNumberGame {
         Scanner input = new Scanner(System.in);
 
         System.out.println("Let's start our game\nGuess the number in range: <1," + M + ">");
-        int playerGuess = 0;
+        int playerGuess;
 
         while(attempts < L) {
+            progressBar = progressBar.substring(0, attempts + 1) + "*" + progressBar.substring(attempts + 2);
             System.out.println("Your attempts: " + progressBar);
             System.out.println(UsefulConstants.GIVE_ME);
             try {
-                playerGuess = input.nextInt();
+                playerGuess = Integer.parseInt(input.nextLine());
             }
             catch (NumberFormatException e) {
                 System.out.println(UsefulConstants.NOT_A_NUMBER);
+                attempts++;
+                continue;
             }
             if (playerGuess > randomNumber) {
                 System.out.println(UsefulConstants.TO_MUCH);
@@ -70,10 +73,8 @@ public class GuessNumberGame {
             }
             else {
                 System.out.println(UsefulConstants.YES);
-                attempts++;
                 break;
             }
-            progressBar = progressBar.substring(0, attempts) + "*" + progressBar.substring(attempts + 1);
         }
 
         if(attempts < L) {
