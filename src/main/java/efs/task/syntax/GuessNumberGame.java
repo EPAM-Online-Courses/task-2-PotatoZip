@@ -47,7 +47,6 @@ public class GuessNumberGame {
     }
     public void play() {
         Scanner input = new Scanner(System.in);
-
         System.out.println("Let's start our game\nGuess the number in range: <1," + M + ">");
         int playerGuess;
 
