@@ -47,12 +47,12 @@ public class GuessNumberGame {
     }
     public void play() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Let's start our game\nGuess the number in range: <1," + M + ">");
+        System.out.println("<1," + M + ">");
         int playerGuess;
 
         while(attempts < L) {
             progressBar = progressBar.substring(0, attempts + 1) + "*" + progressBar.substring(attempts + 2);
-            System.out.println("Your attempts: " + progressBar);
+            System.out.println(progressBar);
             System.out.println(UsefulConstants.GIVE_ME);
             try {
                 playerGuess = Integer.parseInt(input.nextLine());
